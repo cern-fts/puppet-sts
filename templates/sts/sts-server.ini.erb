@@ -1,0 +1,103 @@
+[StandaloneServer]
+hostname = <%= @sts_hosts %>
+port =  <%= @sts_port %>
+scheme = <%= @scheme %>
+webappContext = <%= @webapp_context %>
+warfile =  <%= @war_file %>
+certificate =  <%= @certificate_file %>
+private_key = <%= @certificate_key %>
+crlUpdateInterval = <%= @crl_update_interval %>
+trustStoreDir = <%= @truststore_dir %>
+maxRequestQueueSize = <%= @max_request_queue_size %>
+maxConnections =  <%= @max_connections %>
+shutdownCommand = <%= @shutdown_command %>
+shutdownPort = <%= @shutdown_port %>
+namespaceCheckingMode = <%= @namespace_checking_mode %>
+crlCheckingMode = <%= @clr_checking_mode %>
+ocspCheckingMode =  <%= @ocsp_checking_mode %>
+proxySupport = <%= @proxy_support %>
+wantClientAuth =  <%= @client_auth %>
+requireClientAuth =  <%= @require_client_auth %>
+
+[Messages]
+clockSkew = <%= @clock_skew %>
+lifetime = <%= @lifetime %>
+requireIssueInstant =  <%= @require_issue_instant %>
+requireFrameworkVersion =  <%= @require_framework_instant %>
+requireMessageId = <%= @require_message_id %>
+requiredRecipientId = <%= @require_recipient_id %>
+schemaDirectory = <%= @schema_directory %>
+requireSignature =  <%= @require_signature %>
+enableX509 = <%= @enable_x509 %>
+enableProxy = <%= @enable_proxy %>
+
+[SAML]
+entityId = <%= @entity_id %>
+consumerServiceUrl = <%= @consumer_service_url %>
+metadataFile = <%= @metadata_file %>
+metadataFileFrequency =  <%= @metadata_frequency %>
+certFile = <%= @saml_certificate_file %>
+keyFile = <%= @saml_certificate_key %>
+keyPass = <%= @saml_certificate_key_pass %>
+assertionLifetime = <%= @assertion_life_time %>
+requireRequestId = <%= @require_request_id %>
+requestIdLifetime =  <%= @require_id_lifetime %>
+requestIdSweepFrequency = <%= @require_id_sweep_frequency %>
+authnLifetime = <%= @authn_lifetime %>
+requireAuthnStatement = <%= @require_authn_statement %>
+requireAuthnLocality = <%= @require_authn_locality %>
+requireConditions = <%= @require_conditions %>
+requireAudience = <%= @require_audience %>
+remoteAddressHeader = <%= @remote_address_header %>
+
+[LDAP]
+enableLdap = false
+serverUrl = ldap://127.0.0.1
+useStartTls = false
+baseDn = dc=people,dc=organization,dc=com
+blockWaitTime = 5000
+minPoolSize = 5
+maxPoolSize = 20
+validatePeriodically = false
+validatePeriod = 30
+
+[CAClient]
+serverUrl = <%= @ca_server_url %>
+dnPattern = <%= @dn_pattern %>
+certFile = <%= @ca_client_certificate %>
+keyFile = <%= @ca_client_key %>
+keyPass = <%= @ca_client_key_file %>
+trustStoreDir = <%= @ca_truststore_dir %>
+trustStoreUpdateInterval = <%= @ca_truststore_update_interval %>
+namespaceCheckingMode = <%= @ca_namespace_checking_mode %>
+crlCheckingMode =  <%= @ca_clr_checking_mode %>
+ocspCheckingMode =  <%= @ca_oscp_checking_mode %>
+proxySupport = <%= @proxy_support %>
+caDn = <%= @ca_dn %>
+senderDn = <%= @sender_dn %>
+recipientDn = <%= @recipient_dn %>
+senderKid = <%= @sender_kid %>
+sharedSecret =  <%= @shared_secret %>
+keysize = <%= @key_size %>
+
+[VOMS]
+vomses = <%= @vomses_file %> 
+vomsDir = <%= @voms_dir %>
+updateInterval = <%= @voms_update_interval %>
+namespaceCheckingMode = <%= @voms_namespace_checking_mode %>
+crlCheckingMode = <%= @voms_clr_checking_mode %>
+ocspCheckingMode = <%= @voms_oscp_checking_mode %>
+keysize = <%= @voms_key_size %>
+linkUpdateInterval =  <%= @link_update_interval %>
+baseUrl = <%= @voms_base_url %>
+voName = <%= @vo_name %>
+matchAttributeName = <%= @match_attribute_name %>
+certFile = <%= @voms_client_certificate %>
+keyFile = <%= @voms_client_key %>
+keyPass = <%= @voms_client_key_pass %>
+trustStoreDir = <%= @voms_truststore_dir %>
+incomingAttributeId =  <%= @incoming_attribute_id %>
+incomingLinkAttributeId = <%= @incoming_link_attribute_id %>
+attributeLinkCache = <%= @attribute_link_cache %>
+proxyPathLength = <%= @proxy_path_length %>
+

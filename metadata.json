@@ -1,0 +1,23 @@
+{
+  "author": "amanzi",
+  "dependencies": [
+    {
+      "name": "CERNOps/fetchcrl",
+      "version_requirement": "\u003e\u003d 0.2.2"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "\u003e\u003d 2.0.0"
+    }
+  ],
+  "description": "This module installs and configure an STS serverr",
+  "license": "Apache License, Version 2.0",
+  "name": "amanzi-sts",
+  "operatingsystem_support": [],
+  "project_page": "https://twiki.cern.ch/twiki/bin/view/EMI/EMISTSDocumentation",
+  "requirements": [],
+  "source": "https://github.com/cern-it-sdc-id/puppet-sts",
+  "summary": "This module installs and configure an STSserver",
+  "tags": [],
+  "version": "0.1.0"
+}
