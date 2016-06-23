@@ -106,9 +106,21 @@ class sts::config (
   $incoming_link_attribute_id = $sts::params::incoming_link_attribute_id,
   $attribute_link_cache = $sts::params::attribute_link_cache,
   $proxy_path_length = $sts::params::proxy_path_length,
-
+  
 
 ) inherits sts::params {
 
+ 
+  file {'/etc/sts/sts-server.ini':
+    ensure 	=> file,
+    owner   	=> 'root',
+    group   	=> 'root',
+    content	=> template("sts/sts-server.ini.erb"),
+  }
 
+  file{'/usr/share/sts/metadata':
+    ensure  => file,
+    source  => 'puppet:///modules/sts/FederationMetadata.xml',
+    notify  => Service['sts-service'],
+  }
 }

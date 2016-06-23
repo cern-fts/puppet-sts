@@ -24,8 +24,4 @@ class sts (
   
   Class[sts::install] -> Class[sts::config] -> Class[sts::service]
 
-  class{"sts::install":}
-  class{"sts::config":}
-  class{"sts::service":}
-
 }

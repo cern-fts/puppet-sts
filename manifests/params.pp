@@ -1,8 +1,8 @@
-class sts::params (
+class sts::params {
 
   #standalone server config
 
-  $sts_host = $::fqdn
+  $sts_host = "${::fqdn}"
   $sts_port = 8443
   $scheme   = 'https'
   $webapp_context = 'sts'
@@ -67,48 +67,101 @@ class sts::params (
 
   #CA Client config
 
-  $ca_server_url = $sts::params::ca_server_url,
-  $dn_pattern = $sts::params::dn_pattern,
-  $ca_client_certificate = $sts::params::ca_client_certificate,
-  $ca_client_key = $sts::params::ca_client_key,
-  $ca_client_key_file = $sts::params::ca_client_key_file,
-  $ca_truststore_dir = $sts::params::ca_truststore_dir,
-  $ca_truststore_update_interval = $sts::params::ca_truststore_update_interval,
-  $ca_namespace_checking_mode = $sts::params::ca_namespace_checking_mode,
-  $ca_clr_checking_mode = $sts::params::ca_clr_checking_mode,
-  $ca_oscp_checking_mode = $sts::params::ca_oscp_checking_mode,
-  $proxy_support = $sts::params::proxy_support,
-  $ca_dn = $sts::params::ca_dn,
-  $sender_dn = $sts::params::sender_dn,
-  $recipient_dn = $sts::params::recipient_dn,
-  $sender_kid = $sts::params::sender_kid,
-  $shared_secret = $sts::params::shared_secret,
-  $key_size = $sts::params::key_size,
+  $ca_server_url = 'https://ca.cern.ch:443/iotaca-services/sts/Sts.asmx'
+  $dn_pattern = 'CN=\${http://schemas.xmlsoap.org/claims/CommonName}, O=Organization, DC=sts, DC=cern, DC=ch'
+  $ca_client_certificate = ' /etc/grid-security/iotacacert.pem'
+  $ca_client_key = '/etc/grid-security/iotacakey.pem'
+  $ca_client_key_file = undef
+  $ca_truststore_dir = '/etc/grid-security/certificates'
+  $ca_truststore_update_interval = 600000
+  $ca_namespace_checking_mode = 'IGNORE'
+  $ca_clr_checking_mode = 'IGNORE'
+  $ca_oscp_checking_mode = 'IF_AVAILABLE'
+  $ca_proxy_support = 'ALLOW'
+  $ca_dn = 'CN=xx CA,OU=xx,O=xx,C=xx'
+  $sender_dn = 'C=xx'
+  $recipient_dn = 'C=xx'
+  $sender_kid = 'keyIdentifier'
+  $shared_secret = 'sharedSecret'
+  $key_size = 2048
 
   #VOMS config
   
-  $vomses_file = $sts::params::vomses_file,
-  $voms_dir = $sts::params::voms_dir,
-  $voms_update_interval = $sts::params::voms_update_interval,
-  $voms_namespace_checking_mode = $sts::params::voms_namespace_checking_mode,
-  $voms_clr_checking_mode =  $sts::params::voms_clr_checking_mode,
-  $voms_oscp_checking_mode = $sts::params::voms_oscp_checking_mode,
-  $voms_key_size = $sts::params::voms_key_size,
-  $link_update_interval = $sts::params::link_update_interval,
-  $voms_base_url = $sts::params::voms_base_url,
-  $vo_name = $sts::params::vo_name,
-  $match_attribute_name = $sts::params::match_attribute_name,
-  $voms_client_certificate = $sts::params::voms_client_certificate,
-  $voms_client_key = $sts::params::voms_client_key,
-  $voms_client_key_pass = $sts::params::voms_client_key_pass,
-  $voms_truststore_dir = $sts::params::voms_truststore_dir,
-  $incoming_attribute_id = $sts::params::incoming_attribute_id,
-  $incoming_link_attribute_id = $sts::params::incoming_link_attribute_id,
-  $attribute_link_cache = $sts::params::attribute_link_cache,
-  $proxy_path_length = $sts::params::proxy_path_length,
-
-
-) inherits sts::params {
-
-
+  $vomses_file = '/etc/grid-security/vomses/vomses'
+  $voms_dir = '/etc/grid-security/certificates'
+  $voms_update_interval = 300000
+  $voms_namespace_checking_mode = 'EUGRIDPMA'
+  $voms_clr_checking_mode =  'REQUIRE'
+  $voms_oscp_checking_mode = 'IF_AVAILABLE'
+  $voms_key_size = 2048
+  $link_update_interval = 3600000
+  $voms_base_url = 'https://ftsvoms01.cern.ch:8443/voms/bitface'
+  $vo_name = '/bitface'
+  $match_attribute_name = 'nickname'
+  $voms_client_certificate = '/etc/grid-security/hostcert.pem'
+  $voms_client_key = '/etc/grid-security/hostkey.pem'
+  $voms_client_key_pass = undef
+  $voms_truststore_dir = '/etc/grid-security/certificates'
+  $incoming_attribute_id = 'http://schemas.xmlsoap.org/claims/CommonName'
+  $incoming_link_attribute_id = 'http://schemas.xmlsoap.org/claims/CommonName'
+  $attribute_link_cache = '/tmp/sts-link-cache.txt'
+  $proxy_path_length = 10
+ 
+  #repos
+   #repos 
+  $repos =  {
+    'epel' => {
+      'descr'    => 'Extra Packages for Enterprise Linux add-ons',
+      'baseurl'  => "http://linuxsoft.cern.ch/epel/6/\$basearch",
+      'gpgcheck' => 0,
+      'enabled'  => 1,
+      'protect'  => 1,
+     },
+    'EGI-trustanchors' => {
+      'descr'    => 'EGI-trustanchors',
+      'baseurl'  => 'http://repository.egi.eu/sw/production/cas/1/current/',
+      'gpgcheck' => 0,
+      'enabled'  => 1,
+    },
+    'wlcg' => {
+      'descr'    => 'WLCG Repository',
+      'baseurl'  => "http://linuxsoft.cern.ch/wlcg/sl6/\$basearch",
+      'protect'  => 1,
+      'enabled'  => 1,
+      'priority' => 20,
+      'gpgcheck' => 0,
+   },
+   'EMI-3-base' => {
+      'descr'    => 'EMI 3 base',
+      'baseurl'  => "http://emisoft.web.cern.ch/emisoft/dist/EMI/3/sl6/\$basearch/base",
+      'protect'  => 1,
+      'enabled'  => 1,
+      'priority' => 40,
+      'gpgcheck' => 0,
+   },
+   'EMI-3-contribs' => {
+      'descr'    => 'EMI-3-contribs',
+      'baseurl'  => "http://emisoft.web.cern.ch/emisoft/dist/EMI/3/sl6/\$basearch/contribs",
+      'protect'  => 1,
+      'enabled'  => 1,
+      'priority' => 40,
+      'gpgcheck' => 0,
+   },
+   'EMI-3-third-party' => {
+      'descr'    => 'EMI-3-third-party',
+      'baseurl'  => "http://emisoft.web.cern.ch/emisoft/dist/EMI/3/sl6/\$basearch/third-party",
+      'protect'  => 1,
+      'enabled'  => 1,
+      'priority' => 40,
+      'gpgcheck' => 0,
+   },
+    'EMI-3-updates' => {
+      'descr'    => 'EMI-3-third-updates',
+      'baseurl'  => "http://emisoft.web.cern.ch/emisoft/dist/EMI/3/sl6/\$basearch/updates",
+      'protect'  => 1,
+      'enabled'  => 1,
+      'priority' => 40,
+      'gpgcheck' => 0,
+   }
+  }
 }
