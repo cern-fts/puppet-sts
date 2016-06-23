@@ -51,15 +51,15 @@ requireAudience = <%= @require_audience %>
 remoteAddressHeader = <%= @remote_address_header %>
 
 [LDAP]
-enableLdap = false
-serverUrl = ldap://127.0.0.1
-useStartTls = false
-baseDn = dc=people,dc=organization,dc=com
-blockWaitTime = 5000
-minPoolSize = 5
-maxPoolSize = 20
-validatePeriodically = false
-validatePeriod = 30
+enableLdap = <%= @enable_ldap %>
+serverUrl = <%= @ldap_server_url %>
+useStartTls = <%= @use_start_tls %>
+baseDn = <%= @base_dn %>
+blockWaitTime = <%= @block_wait_time %>
+minPoolSize = <%= @min_pool_size %>
+maxPoolSize = <%= @max_pool_size %>
+validatePeriodically = <%= @validate_periodically %>
+validatePeriod = <%= @validate_period %>
 
 [CAClient]
 serverUrl = <%= @ca_server_url %>
